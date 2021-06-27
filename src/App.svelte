@@ -27,6 +27,16 @@
 <main>
 	<h1>年表作成</h1>
 	<div class="box" contenteditable="true" on:click={() => editorToggle = true}>
+		インポートJSON: <input type="file" on:change={(e) => {
+			const reader = new FileReader()
+			reader.readAsText(e.target.files[0])
+			reader.onload = (e) => {
+				const obj = JSON.parse(e.target.result)
+				title = obj.title
+				description = obj.description
+				chronology = obj.chronology
+			}
+		}}><br>
 		タイトル: <input type="text" bind:value={title}><br>
 		<textarea placeholder="Markdounで摘要を書いてね" bind:value={description}></textarea>
 		<h1>{title}</h1>
