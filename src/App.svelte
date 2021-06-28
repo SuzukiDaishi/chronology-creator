@@ -1,6 +1,6 @@
 <script>
 	import marked from 'marked'
-	import { each } from 'svelte/internal'
+	import { each, onMount } from 'svelte/internal'
 	export let title = ''
 	export let description = ''
 	export let editorToggle = false
@@ -22,6 +22,12 @@
 		chronology.splice(idx, 1)
 		chronology = chronology
 	}
+
+	onMount(async () => {
+		window.onbeforeunload = (e) => {
+			return 'ページ遷移しても良いですか？'
+		}
+	})
 </script>
 
 <main>
